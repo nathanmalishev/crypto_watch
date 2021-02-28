@@ -18,6 +18,7 @@ defmodule CoinjarWeb.Router do
     pipe_through :browser
 
     live "/", CoinsLive, :index
+    live "/history", HistoryLive, :index
   end
 
   # Other scopes may use custom stacks.

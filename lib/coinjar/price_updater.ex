@@ -1,4 +1,7 @@
 defmodule Coinjar.PriceUpdater do
+  @moduledoc """
+  This module asynchronously handles the fetching of coin prices. It's handled in one central location seperate to the live view. So if it crashes it should not affect the liveview & can restart in the background. Secondly for multiple connecting clients we are only polling the API's in one place.
+  """
   use GenServer
 
   require Logger
@@ -33,7 +36,6 @@ defmodule Coinjar.PriceUpdater do
     ## Our background timer going off
     {:ok, coin_obj} = Coin.fetch_latest(coin_name)
 
-    Logger.debug("Coin name : #{Coin.coin_to_string(coin_name)}")
     schedule_work(coin_name, prices)
     PubSub.broadcast(Coinjar.PubSub, Coin.coin_to_string(coin_name), coin_obj)
     {:noreply, Map.put(prices, coin_name, coin_obj)}
@@ -45,10 +47,6 @@ defmodule Coinjar.PriceUpdater do
 
   ## Client API
   def update_coin(pid, coin) do
-    coin
-    |> inspect
-    |> Logger.debug()
-
     GenServer.cast(pid, {:update, coin})
   end
 
