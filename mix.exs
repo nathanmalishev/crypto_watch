@@ -47,7 +47,8 @@ defmodule Coinjar.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.8"},
       {:phoenix_live_view, "~> 0.15.4"},
-      {:floki, ">= 0.27.0", only: :test}
+      {:floki, ">= 0.27.0", only: :test},
+      {:mock, "~> 0.3.0", only: :test}
     ]
   end
 

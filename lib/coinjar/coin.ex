@@ -6,6 +6,7 @@ defmodule Coinjar.Coin do
   require PipeLogger
 
   require Logger
+  alias Coinjar.Coin, as: Coin
 
   schema "coins" do
     field :last, :float
@@ -34,7 +35,7 @@ defmodule Coinjar.Coin do
   Casts our map to a coin, runs any validation
   """
   def cast_struct(map) do
-    {%Coinjar.Coin{}, @type_map}
+    {%Coin{}, @type_map}
     |> Ecto.Changeset.cast(map, Map.keys(@type_map))
     |> Ecto.Changeset.apply_action(:update)
   end
@@ -52,11 +53,11 @@ defmodule Coinjar.Coin do
   Fetch's all the saved prices users have stored. 
   """
   def fetch_saved() do
-    Coinjar.Repo.all(Coinjar.Coin)
+    Coinjar.Repo.all(Coin)
   end
 
   ## Fetch & handle latest data source
-  @spec fetch_latest(%Coinjar.Coin{}) :: {:ok, %Coinjar.Coin{}} | {:error, charlist()}
+  @spec fetch_latest(%Coin{}) :: {:ok, %Coin{}} | {:error, charlist()}
   def fetch_latest(coin_code) when is_atom(coin_code) do
     create_url(coin_code)
     |> (&PipeLogger.debug(&1, "Fetching url:#{&1}")).()
@@ -67,11 +68,11 @@ defmodule Coinjar.Coin do
   defp handle_fetch({:ok, %HTTPoison.Response{status_code: 200, body: body}}, coin_code) do
     Jason.decode!(body, keys: :atoms)
     |> Map.put(:coin, coin_to_string(coin_code))
-    |> Coinjar.Coin.cast_struct()
+    |> Coin.cast_struct()
   end
 
   defp handle_fetch({:ok, %HTTPoison.Response{status_code: 404}}, coin_code) do
-    {:error, "Coin: #{coin_code} not Found"}
+    {:error, "Coin: #{coin_code} not found"}
   end
 
   defp handle_fetch({:error, %HTTPoison.Error{}}, _coin_code) do

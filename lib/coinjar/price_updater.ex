@@ -9,7 +9,7 @@ defmodule Coinjar.PriceUpdater do
   alias Coinjar.Coin, as: Coin
   alias Phoenix.PubSub, as: PubSub
 
-  @time_interval 20000
+  @time_interval 20000 # in ms
 
   def start_link(init_arg) do
     GenServer.start_link(__MODULE__, init_arg, name: init_arg)
