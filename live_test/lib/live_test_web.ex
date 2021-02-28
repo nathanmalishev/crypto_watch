@@ -1,12 +1,12 @@
-defmodule CoinjarWeb do
+defmodule LiveTestWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use CoinjarWeb, :controller
-      use CoinjarWeb, :view
+      use LiveTestWeb, :controller
+      use LiveTestWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,19 +19,19 @@ defmodule CoinjarWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: CoinjarWeb
+      use Phoenix.Controller, namespace: LiveTestWeb
 
       import Plug.Conn
-      import CoinjarWeb.Gettext
-      alias CoinjarWeb.Router.Helpers, as: Routes
+      import LiveTestWeb.Gettext
+      alias LiveTestWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/coinjar_web/templates",
-        namespace: CoinjarWeb
+        root: "lib/live_test_web/templates",
+        namespace: LiveTestWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -45,7 +45,7 @@ defmodule CoinjarWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {CoinjarWeb.LayoutView, "live.html"}
+        layout: {LiveTestWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
@@ -72,7 +72,7 @@ defmodule CoinjarWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import CoinjarWeb.Gettext
+      import LiveTestWeb.Gettext
     end
   end
 
@@ -87,9 +87,9 @@ defmodule CoinjarWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import CoinjarWeb.ErrorHelpers
-      import CoinjarWeb.Gettext
-      alias CoinjarWeb.Router.Helpers, as: Routes
+      import LiveTestWeb.ErrorHelpers
+      import LiveTestWeb.Gettext
+      alias LiveTestWeb.Router.Helpers, as: Routes
     end
   end
 

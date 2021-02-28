@@ -1,11 +1,11 @@
-defmodule CoinjarWeb.Router do
-  use CoinjarWeb, :router
+defmodule LiveTestWeb.Router do
+  use LiveTestWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {CoinjarWeb.LayoutView, :root}
+    plug :put_root_layout, {LiveTestWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,14 +14,14 @@ defmodule CoinjarWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", CoinjarWeb do
+  scope "/", LiveTestWeb do
     pipe_through :browser
 
-    live "/", CoinsLive, :index
+    live "/", PageLive, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", CoinjarWeb do
+  # scope "/api", LiveTestWeb do
   #   pipe_through :api
   # end
 
@@ -37,7 +37,7 @@ defmodule CoinjarWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: CoinjarWeb.Telemetry
+      live_dashboard "/dashboard", metrics: LiveTestWeb.Telemetry
     end
   end
 end

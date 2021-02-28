@@ -7,16 +7,16 @@
 # General application configuration
 use Mix.Config
 
-config :coinjar,
-  ecto_repos: [Coinjar.Repo]
+config :live_test,
+  ecto_repos: [LiveTest.Repo]
 
 # Configures the endpoint
-config :coinjar, CoinjarWeb.Endpoint,
+config :live_test, LiveTestWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "5FtcSUEOG8dBUqycz71amNBEqkEAKm6oG+L6OurAwjVS1N1YDe1dPwpn+W+zhzc/",
-  render_errors: [view: CoinjarWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Coinjar.PubSub,
-  live_view: [signing_salt: "5xHFvUJk26rg5EdogUmOUppkl93ONsqs"]
+  secret_key_base: "wIQA8Sjgz70dcWsJaV9btD16JZSESbKGMW8NF2/laGwutCE+nKloD5kXqcG5ojVY",
+  render_errors: [view: LiveTestWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: LiveTest.PubSub,
+  live_view: [signing_salt: "2UsjW+9V"]
 
 # Configures Elixir's Logger
 config :logger, :console,

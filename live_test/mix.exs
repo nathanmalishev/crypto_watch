@@ -1,9 +1,9 @@
-defmodule Coinjar.MixProject do
+defmodule LiveTest.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :coinjar,
+      app: :live_test,
       version: "0.1.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule Coinjar.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Coinjar.Application, []},
+      mod: {LiveTest.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -37,6 +37,8 @@ defmodule Coinjar.MixProject do
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
+      {:phoenix_live_view, "~> 0.13.0"},
+      {:floki, ">= 0.0.0", only: :test},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.2"},
@@ -44,10 +46,7 @@ defmodule Coinjar.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
-      {:httpoison, "~> 1.8"},
-      {:phoenix_live_view, "~> 0.15.4"},
-      {:floki, ">= 0.27.0", only: :test}
+      {:plug_cowboy, "~> 2.0"}
     ]
   end
 
